@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>넷플릭스 대한민국 = 인터넷으로 시리즈와 영화를 시청하세요.</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/shortcut-icon.png}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+</head>
+<body class="unsigned --theme-dark">
+
+<section class="landing">
+    <div class="wrapper">
+        <header class="header">
+            <img th:src="@{/resources/images/logo.png}" class="logo" alt="Netflix">
+            <div class="button-container">
+                <a th:href="@{/user/register}" class="button">회원가입</a>
+                <a th:href="@{/user/login}" class="button">로그인</a>
+            </div>
+        </header>
+        <form class="register-form" method="get" th:action="@{/user/register}">
+            <h1 class="title">영화와 시리즈를<br>무제한으로.</h1>
+            <h2 class="subtitle">다양한 디바이스에서 시청하세요. 언제든 해지하실 수 있습니다.</h2>
+            <span class="ready">시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.</span>
+            <label class="input-container">
+                <span hidden>이메일 주소</span>
+                <input class="input --theme-light" maxlength="50" name="email" placeholder=" " type="email">
+                <span class="placeholder">이메일 주소</span>
+                <input type="submit" class="button" value="시작하기">
+                <span class="warning empty">이메일 주소를 입력해 주세요.</span>
+                <span class="warning invalid"> 정확한 이메일 주소를 입력하세요.</span>
+            </label>
+        </form>
+    </div>
+</section>
+<section class="box banner tv">
+    <div class="wrapper">
+        <div class="text-container">
+            <h2 class="title">TV로 즐기세요.</h2>
+            <span class="content">스마트 TV, PlayStation, Xbox, Chromecast, Apple TV, 블루레이 플레이어 등 다양한 디바이스에서 시청하세요.</span>
+        </div>
+        <div class="image-container">
+            <img class="image" th:src="@{/resources/images/index.unsigned-box.tv.png}" alt="">
+            <video autoplay class="video" loop muted th:src="@{/resources/videos/index.unsigned-box.tv.m4v}"></video>
+        </div>
+    </div>
+</section>
+<section class="box banner offline">
+    <div class="wrapper reversed">
+        <div class="text-container">
+            <h2 class="title">즐겨 보는 콘텐츠를 저장해 오프라인으로 시청하세요.</h2>
+            <span class="content">간편하게 저장하고 빈틈없이 즐겨보세요.</span>
+        </div>
+        <div class="image-container">
+            <img class="image" th:src="@{/resources/images/index.unsigned-box.offline.png}" alt="">
+            <div class="saving --theme-dark">
+                <img class="poster-image" th:src="@{/resources/images/index.unsigned-box.offline-poster.png}" alt="">
+                <div class="text-container">
+                    <span class="title">기묘한 이야기</span>
+                    <span class="saving">저장중...</span>
+                </div>
+                <img class="progress-image" th:src="@{resources/images/index.unsigned-box.offline.gif}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="box banner device">
+    <div class="wrapper">
+        <div class="text-container">
+            <h2 class="title">다양한 디바이스에서 시청하세요.</h2>
+            <span class="content">각종 영화와 시리즈를 스마트폰, 태블릿, 노트북, TV에서 무제한으로 스트리밍하세요. 추가 요금이 전혀 없습니다.</span>
+        </div>
+        <div class="image-container">
+            <img class="image" th:src="@{/resources/images/index.unsigned-box.device.png}" alt="">
+            <video autoplay class="video" loop muted
+                   th:src="@{/resources/videos/index.unsigned-box.device.m4v}"></video>
+        </div>
+    </div>
+</section>
+<section class="box banner">
+    <div class="wrapper reversed">
+        <div class="text-container">
+            <h2 class="title">어린이 전용 프로필을 만들어 보세요.</h2>
+            <span class="content">자기만의 공간에서 좋아하는 캐릭터와 즐기는 신나는 모험. 자녀에게 이 특별한 경험을 선물하세요. 넷플릭스 회원이라면 무료입니다.</span>
+        </div>
+        <div class="image-container">
+            <img class="image" th:src="@{/resources/images/index.unsigned-box.kids.png}" alt="">
+        </div>
+    </div>
+</section>
+<section class="box faq">
+    <div class="wrapper">
+        <h2 class="title">자주 묻는 질문</h2>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input checked name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">넷플릭스란 무엇인가요?</span>
+                <span class="answer">넷플릭스는 각종 수상 경력에 빛나는 시리즈, 영화, 애니메이션, 다큐멘터리 등 다양한 콘텐츠를 인터넷 연결이 가능한 수천 종의 디바이스에서 시청할 수 있는 스트리밍 서비스입니다.<br><br>저렴한 월 요금으로 일체의 광고 없이 원하는 시간에 원하는 만큼 즐길 수 있습니다. 무궁무진한 콘텐츠가 준비되어 있으며 매주 새로운 시리즈와 영화가 제공됩니다. </span>
+            </label>
+        </div>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">넷플릭스 요금은 얼마인가요?</span>
+                <span class="answer">스마트폰, 태블릿, 스마트 TV, 노트북, 스트리밍 디바이스 등 다양한 디바이스에서 월정액 요금 하나로 넷플릭스를 시청하세요. 멤버십 요금은 월 9,500원부터 17,000원까지 다양합니다. 추가 비용이나 약정이 없습니다. </span>
+            </label>
+        </div>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">어디에서 시청할 수 있나요?</span>
+                <span class="answer">언제 어디서나 시청할 수 있습니다. 넷플릭스 계정으로 로그인하면 PC에서 netflix.com을 통해 바로 시청할 수 있으며, 인터넷이 연결되어 있고 넷플릭스 앱을 지원하는 디바이스(스마트 TV, 스마트폰, 태블릿, 스트리밍 미디어 플레이어, 게임 콘솔 등)에서도 언제든지 시청할 수 있습니다. <br><br>iOS, Android, Windows 10용 앱에서는 좋아하는 시리즈를 저장할 수도 있습니다. 저장 기능을 이용해 이동 중이나 인터넷에 연결할 수 없는 곳에서도 시청하세요. 넷플릭스는 어디서든 함께니까요. </span>
+            </label>
+        </div>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">멤버십을 해지하려면 어떻게 하나요?</span>
+                <span class="answer">넷플릭스는 부담 없이 간편합니다. 성가신 계약도, 약정도 없으니까요. 멤버십 해지도 온라인에서 클릭 두 번이면 완료할 수 있습니다. 해지 수수료도 없으니 원할 때 언제든 계정을 시작하거나 종료하세요. </span>
+            </label>
+        </div>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">넷플릭스에서 어떤 콘텐츠를 시청할 수 있나요?</span>
+                <span class="answer">넷플릭스는 장편 영화, 다큐멘터리, 시리즈, 애니메이션, 각종 상을 수상한 넷플릭스 오리지널 등 수많은 콘텐츠를 확보하고 있습니다. 마음에 드는 콘텐츠를 원하는 시간에 원하는 만큼 시청하세요. </span>
+            </label>
+        </div>
+        <div class="faq-container">
+            <label class="faq-item">
+                <input name="faq" type="radio" hidden class="checker">
+                <img th:src="@{/resources/images/index.unsigned-box.faq-close.png}" class="close" alt="X">
+                <span class="question">아이들이 넷플릭스를 봐도 좋을까요?</span>
+                <span class="answer">멤버십에 넷플릭스 키즈 환경이 포함되어 있어 자녀가 자기만의 공간에서 가족용 시리즈와 영화를 즐기는 동안 부모가 이를 관리할 수 있습니다. <br><br>키즈 프로필과 더불어 PIN 번호를 이용한 자녀 보호 기능도 있어, 자녀가 시청할 수 있는 콘텐츠의 관람등급을 제한하고 자녀의 시청을 원치 않는 특정 작품을 차단할 수도 있습니다. </span>
+            </label>
+        </div>
+        <form class="register-form" method="get" th:action="@{/user/register}">
+            <span class="ready">시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.</span>
+            <label class="input-container">
+                <span hidden>이메일 주소</span>
+                <input class="input --theme-light" maxlength="50" name="email" placeholder=" " type="email">
+                <span class="placeholder">이메일 주소</span>
+                <input type="submit" class="button" value="시작하기">
+                <span class="warning empty">이메일 주소를 입력해 주세요.</span>
+                <span class="warning invalid"> 정확한 이메일 주소를 입력하세요.</span>
+            </label>
+        </form>
+    </div>
+</section>
+
+<footer class="box footer">
+    <div class="wrapper">
+        <span class="text">질문이 있으신가요? 문의 전화:  080-001-9587</span>
+        <ul class="sitemap">
+            <li class="item">
+                <ul class="sitemap">
+                    <li class="item">
+                        <a class="link" th:href="@{#}">자주 묻는 질문</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">투자 정보(IR)</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">개인정보</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">속도 테스트</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item">
+                <ul class="sitemap">
+                    <li class="item">
+                        <a class="link" th:href="@{#}">고객 센터</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">입사 정보 </a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">쿠키 설정</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">법적 고지</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item">
+                <ul class="sitemap">
+                    <li class="item">
+                        <a class="link" th:href="@{#}">계정 미디어</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">넷플릭스 지원 디바이스</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">회사 정보 </a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">오직 넷플릭스에서</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item">
+                <ul class="sitemap">
+                    <li class="item">
+                        <a class="link" th:href="@{#}">센터</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">이용 약관</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" th:href="@{#}">문의하기</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <pre class="company">넷플릭스 대한민국
+
+넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587
+대표: 레지널드 숀 톰프슨
+이메일 주소: korea@netflix.com
+주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161
+사업자등록번호: 165-87-00119
+클라우드 호스팅: Amazon Web Services Inc.</pre>
+    </div>
+</footer>
+
+</body>
+</html>

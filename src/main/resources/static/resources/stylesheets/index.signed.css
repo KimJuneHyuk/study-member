@@ -1,0 +1,528 @@
+@charset "UTF-8";
+
+body {
+    background-color: rgb(20, 20, 20);
+    color: rgb(255, 255, 255);
+    overflow: hidden auto;
+}
+
+body > .header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(20, 20, 20, 100%) 100%);
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 1.5rem 2.5rem;
+    position: fixed;
+    z-index: 1;
+}
+
+body > .header > .logo {
+    height: 2rem;
+    margin-right: 2.5rem;
+}
+
+body > .header > .menu-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .header > .menu-container.main {
+    flex: 1;
+}
+
+body > .header > .menu-container.main > .menu + .menu {
+    margin-left: 1.125rem;
+}
+
+body > .header > .menu-container.main > .menu > .link {
+    color: inherit;
+    text-decoration: none;
+    transition-duration: 500ms;
+    transition-property: color;
+    transition-timing-function: ease;
+}
+
+body > .header > .menu-container.main > .menu > .link:hover {
+    color: rgb(160, 160, 160);
+}
+
+body > .header > .menu-container.right > .menu + .menu {
+    margin-left: 1.5rem;
+}
+
+body > .header > .menu-container.right > .menu.search > .icon {
+    cursor: pointer;
+    font-size: 1.125rem;
+}
+
+body > .header > .menu-container.right > .menu.user {
+    position: relative;
+}
+
+body > .header > .menu-container.right > .menu.user > .profile-container {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .header > .menu-container.right > .menu.user > .profile-container > .image {
+    height: 2rem;
+    border-radius: 0.25rem;
+    margin-right: 0.75rem;
+    overflow: hidden;
+}
+
+body > .header > .menu-container.right > .menu.user > .profile-container > .icon {
+    font-size: 0.75rem;
+    transform: translateY(-0.125rem) rotate(0deg);
+    transition-duration: 250ms;
+    transition-property: transform;
+    transition-timing-function: ease;
+}
+
+body > .header > .menu-container.right > .menu.user > .profile-container:hover > .icon {
+    transform: translateY(0.125rem) rotate(180deg);
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container {
+    top: 100%;
+    right: 0;
+    min-width: 15rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    padding-top: 0.75rem;
+    pointer-events: none;
+    position: absolute;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+    white-space: nowrap;
+}
+
+body > .header > .menu-container.right > .menu.user:hover > .menu-container,
+body > .header > .menu-container.right > .menu.user > .menu-container:hover {
+    opacity: 1;
+    pointer-events: all;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu {
+    background-color: rgba(20, 20, 20, 90%);
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu:first-child {
+    padding-top: 1rem;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu:last-child {
+    padding-bottom: 1rem;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu > .link {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.3rem 1rem;
+    text-decoration: none;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu > .link:hover {
+    text-decoration: underline;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu.profile-container > .link > .image {
+    height: 2rem;
+    border-radius: 0.33rem;
+    margin-right: 0.75rem;
+    overflow: hidden;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu.general > .link > .icon-container {
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 0.75rem;
+}
+
+body > .header > .menu-container.right > .menu.user > .menu-container > .menu.logout > .link {
+    border-top: 0.0625rem solid rgb(80, 80, 80);
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+body > .today-container {
+    width: 100vw;
+    height: 56.25vw;
+    overflow: hidden;
+    position: relative;
+}
+
+body > .today-container > .video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 3rem);
+    margin: -1.5rem 0;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+}
+
+body > .today-container > .dimmer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(0deg, rgba(20, 20, 20, 100%) 0%, rgba(0, 0, 0, 0) 75%);
+    position: absolute;
+}
+
+body > .today-container > .spec-container {
+    bottom: 4rem;
+    left: 2.5rem;
+    width: 30vw;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: absolute;
+}
+
+body > .today-container > .spec-container > .image {
+    align-self: stretch;
+    margin-bottom: 2rem;
+}
+
+body > .today-container > .spec-container > .desc {
+    font-size: 1.125rem;
+    line-height: 125%;
+    margin-bottom: 2rem;
+    text-align: justify;
+    text-shadow: rgba(0, 0, 0, 75%) 0 0 0.25rem;
+}
+
+body > .today-container > .spec-container > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .today-container > .spec-container > .button-container > .button {
+    align-items: center;
+    border-radius: 0.33rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.125rem;
+    font-weight: 500;
+    justify-content: center;
+    padding: 0.625rem 1.5rem;
+    text-decoration: unset;
+}
+
+body > .today-container > .spec-container > .button-container > .button + .button {
+    margin-left: 0.75rem;
+}
+
+body > .today-container > .spec-container > .button-container > .button.play {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+body > .today-container > .spec-container > .button-container > .button.spec {
+    background-color: rgb(80, 80, 80);
+}
+
+body > .today-container > .spec-container > .button-container > .button > .icon {
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+}
+
+body > .media-container {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    overflow: hidden auto;
+    pointer-events: none;
+    position: absolute;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+    z-index: 9;
+}
+
+body > .media-container.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+body > .media-container > .cover {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(20, 20, 20, 85%);
+    opacity: 0;
+    position: absolute;
+    transition-duration: 250ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+    z-index: 0;
+}
+
+body > .media-container.visible > .cover {
+    opacity: 1;
+}
+
+body > .media-container > .dialog {
+    top: 2rem;
+    left: 50%;
+    width: calc(100% - 4rem);
+    max-width: 50rem;
+    align-items: stretch;
+    background-color: rgb(20, 20, 20);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    transform: scale(90%) translateX(-50%);
+    transition-duration: 250ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+    z-index: 1;
+}
+
+body > .media-container.visible > .dialog {
+    opacity: 1;
+    transform: scale(100%) translateX(-50%);
+}
+
+body > .media-container > .dialog > .loading {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(20, 20, 20);
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+body > .media-container.loading > .dialog > .loading {
+    display: block;
+}
+
+body > .media-container > .dialog > .loading > .image {
+    top: 50%;
+    left: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    animation-name: animation-media-container-loading;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    transform: translate(-50%, -50%);
+    transform-origin: left top;
+}
+
+@keyframes animation-media-container-loading {
+    from {
+        transform: rotate(0deg) translate(-50%, -50%);
+    }
+    to {
+        transform: rotate(360deg) translate(-50%, -50%);
+    }
+}
+
+body > .media-container > .dialog > .video-container {
+    /*height: min(calc(100vw - 4rem), 50rem);*/
+    overflow: hidden;
+    position: relative;
+}
+
+body > .media-container > .dialog > .video-container > .video {
+    width: 100%;
+    margin: -1rem 0;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(20, 20, 20, 100%) 0%, rgba(0, 0, 0, 0) 75%);
+    box-sizing: border-box;
+    padding: 0 3rem 4rem 3rem;
+    position: absolute;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .image {
+    width: 40%;
+    min-width: 10rem;
+    margin-bottom: 5%;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button + .button {
+    margin-left: 0.75rem;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.play {
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.3rem;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.625rem 1.5rem;
+    user-select: none;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.play:hover {
+    background-color: rgb(210, 210, 210);
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.play > .icon {
+    margin-right: 0.5rem;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite {
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    border: 0.125rem solid rgba(255, 255, 255, 50%);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite > .check {
+    display: none;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite > .icon {
+    display: none;
+    font-size: 1.2rem;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite > .check:not(:checked) ~ .icon.add {
+    display: block;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite > .check:checked ~ .icon.remove {
+    display: block;
+}
+
+body > .media-container > .dialog > .video-container > .spec-container > .button-container > .button.favorite > .hint {
+    bottom: 100%;
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+body > .media-container > .dialog > .info-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem 3rem 3rem 3rem;
+}
+
+body > .media-container > .dialog > .info-container > .left {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 2.25rem;
+}
+
+body > .media-container > .dialog > .info-container > .left > .top {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 1.25rem;
+}
+
+body > .media-container > .dialog > .info-container > .left > .top > * + * {
+    margin-left: 0.5rem;
+}
+
+body > .media-container > .dialog > .info-container > .left > .top > .box {
+    border: 0.0625rem solid rgb(60, 60, 60);
+    border-radius: 0.125rem;
+    cursor: default;
+    font-size: 0.8rem;
+    font-style: italic;
+    padding: 0.25rem 0.5rem;
+    user-select: none;
+}
+
+body > .media-container > .dialog > .info-container > .left > .desc {
+    font-size: 1.125rem;
+    line-height: 125%;
+}
+
+body > .media-container > .dialog > .info-container > .right {
+    min-width: 12.5rem;
+    align-items: stretch;
+    display: flex;
+    flex: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .media-container > .dialog > .info-container > .right > .item + .item {
+    margin-top: 1rem;
+}
+
+body > .media-container > .dialog > .info-container > .right > .item > .title {
+    color: rgb(160, 160, 160);
+    margin-right: 0.33rem;
+}
+
+body > .media-container > .dialog > .info-container > .right > .item > .value {
+    line-height: 125%;
+}
+
+body > .media-container > .dialog > .info-container > .right > .item > .value > .link {
+    color: inherit;
+    text-decoration: none;
+}
+
+body > .media-container > .dialog > .info-container > .right > .item > .value > .link:hover {
+    text-decoration: underline;
+}

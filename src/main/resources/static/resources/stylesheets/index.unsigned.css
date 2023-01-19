@@ -1,0 +1,523 @@
+@charset "UTF-8";
+body.unsigned  .register-form {
+    max-width: 50rem;
+    /*최대 높이 설정 한다.*/
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+}
+body.unsigned  .register-form >.title {
+    max-width: 70%;
+    font-size: 4.5rem;
+    /*글자 크기*/
+    text-align: center;
+    font-weight: 600;
+    /*글자 굵기*/
+    line-height: 130%;
+    /*글자 간격*/
+    margin-bottom: 1rem;
+    letter-spacing: 0.2rem;
+    /*    글자 글자 사이 간격*/
+}
+body.unsigned  .register-form >.subtitle {
+    font-size: 1.625rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+body.unsigned  .register-form > .ready {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+body.unsigned  .register-form > .input-container {
+    align-items: stretch;
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 2.5rem;
+    position: relative;
+}
+body.unsigned  .register-form > .input-container > .input {
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+    box-sizing: border-box;
+    flex: 1;
+    padding: 1.65rem 0.875rem 0.85rem 0.875rem;
+}
+body.unsigned  .register-form > .input-container > .placeholder {
+    top: 1.125rem;
+    left: 0.875rem;
+    color: rgb(100,100,100);
+    font-size: 1.1rem;
+    pointer-events: none;
+    /*이벤트 관련 발생의 상태를 지정할 수 있다.*/
+    position: absolute;
+    /*transform: translateY(-50%);*/
+    transition-duration: 100ms;
+    /* 변화이 시작 부터 끝나는데 걸리는 시간*/
+    transition-property: top,font-size;
+    /*transition 이 적용될 속성을 정할 수 있습니다.*/
+    transition-timing-function: ease-in-out;
+    /*    변화하는 방법*/
+}
+body.unsigned  .register-form > .input-container > .input:not(:placeholder-shown) + .placeholder,
+body.unsigned  .register-form > .input-container > .input:focus + .placeholder {
+    top: 0.5rem;
+    font-size: 0.8rem;
+}
+body.unsigned  .register-form > .input-container > .button {
+    background-color: rgb(var(--theme-color-red));
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    /*글자간의 간격을 지정할 수 있습니다.*/
+    padding: 0 1.75rem;
+}
+body.unsigned  .register-form > .input-container > .button:hover {
+    filter: brightness(90%);
+}
+body.unsigned  .register-form > .input-container > .button:active {
+    filter: brightness(80%);
+}
+body.unsigned  .register-form > .input-container > .input:placeholder-shown ~ .warning.empty {
+    display: block;
+}
+
+body.unsigned  .register-form > .input-container > .input:invalid ~ .warning.invalid {
+    display: block;
+}
+
+body.unsigned  .register-form > .input-container > .warning {
+    top: calc(100% + 0.5rem);
+    color: rgb(var(--theme-color-red-hover));
+    display: none;
+    font-size: 0.9rem;
+    position: absolute;
+}
+
+
+
+
+body.unsigned {
+    width: 100%;
+    /*가로 길이*/
+    min-height: 100%;
+    /*최소 높이 설정*/
+    align-items: stretch;
+    /*flex-container 크기 만큼 늘어뜨린다.*/
+    display: flex;
+    /*플렉스*/
+    flex-direction: column;
+    /*정렬 세로*/
+    justify-content: flex-start;
+    /*정렬 세로 시작점*/
+    position: absolute;
+/*    포지션 설정 absolute : position 속성 값이 static 이 아닌 가장 가까운 부모나 선조 기준으로 움직인다.*/
+}
+
+body.unsigned > .landing {
+    height: 100vh;
+    /*높이 화면 기준 100vh 꽉 채우겠다*/
+    background-image: url("/resources/images/index.unsigned-bg.png");
+    /*배경 이미지 주소 입력 하여 설정*/
+    background-position: center;
+    /*배경이미지 위치 지정 center*/
+    background-repeat: no-repeat;
+    /*배경이미지 반복 설정 하는것*/
+    background-size: cover;
+/*    배경이미지 크기 설정*/
+}
+body.unsigned > .landing > .wrapper > .register-form {
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+
+body.unsigned > .landing > .wrapper {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    /*radial-r=gradient 가 미호환시 색을 지정 합니다.*/
+    background: radial-gradient(circle, rgba(0,0,0,25%) 0%, rgba(0,0,0,100%) 100%);
+    position: relative;
+/*    relative static 이었을떄 위치를 기준으로 위치를 설정한다.*/
+}
+
+body.unsigned > .landing > .wrapper  > .header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.75rem 3.5rem;
+}
+body.unsigned > .landing > .wrapper > .header > .logo {
+    height: 2.8125rem;
+}
+
+body.unsigned > .landing > .wrapper  > .header > .button-container {
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: center;
+}
+body.unsigned > .landing > .wrapper  > .header > .button-container > .button {
+    background-color: rgb(var(--theme-color-red));
+    border-radius: 0.25rem;
+    color: inherit;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+body.unsigned > .landing > .wrapper  > .header > .button-container > .button:hover {
+    background-color: rgb(var(--theme-color-red-hover));
+}
+body.unsigned > .landing > .wrapper  > .header > .button-container > .button + .button {
+    margin-left: 1rem;
+}
+
+
+
+body.unsigned > .box {
+    border-top: 0.4rem solid rgb(34,34,34);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+}
+body.unsigned > .box > .wrapper {
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+body.unsigned > .box > .wrapper.reversed {
+    flex-direction: row-reverse;
+}
+body.unsigned > .box > .wrapper  > .text-container {
+    max-width: 45%;
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: center;
+
+}
+body.unsigned > .box > .wrapper  > .text-container > .title {
+    font-size: 3.75rem;
+    font-weight: 500;
+    line-height: 125%;
+    margin-bottom: 1.25rem;
+}
+body.unsigned > .box > .wrapper  > .text-container > .content {
+    font-size: 1.625rem;
+}
+body.unsigned > .box > .wrapper > .image-container {
+    max-width: 45%;
+    flex: 1;
+    position: relative;
+}
+body.unsigned > .box > .wrapper > .image-container > .image {
+    width: 100%;
+}
+body.unsigned > .box.tv > .wrapper > .image-container > .video {
+    top: 20.5%;
+    position: absolute;
+    width: 72.8%;
+    left: calc(50% - 0.125rem);
+    transform: translateX(-50%);
+    z-index: -1;
+}
+body.unsigned > .box.device > .wrapper > .image-container > .video {
+    top: 10%;
+    left: calc(50% - 0.125rem);
+    width: 60%;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving {
+    bottom: 7.5%;
+    left: 50%;
+    width: 17.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border: 0.125rem solid rgb(34,34,34);
+    border-radius: 0.75rem;
+    padding: 0.375rem 0.5rem;
+    box-sizing: border-box;
+    position: absolute;
+    transform: translateX(-50%);
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving > .poster-image {
+    height: 4.5rem;
+    margin: 0 1rem 0 0.375rem;
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving > .text-container {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    white-space: nowrap;
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving > .text-container >.title {
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving > .text-container > .saving {
+    color: rgb(30,144,255);
+}
+body.unsigned > .box.offline > .wrapper > .image-container > .saving > .progress-image {
+    height: 3rem;
+}
+body.unsigned > .box.faq > .wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+body.unsigned > .box.faq > .wrapper > .title {
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+body.unsigned > .box.faq > .wrapper > .faq-container {
+    max-width: 50rem;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item {
+    background-color: rgb(34,34,34);
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item > .close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 2rem;
+    transform: rotate(-45deg);
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item > .checker:checked ~ .close {
+    transform: rotate(0deg);
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item + .faq-item {
+    margin-top: 0.375rem;
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item >.question {
+    font-size: 1.75rem;
+    padding: 1.125rem 4rem 1.125rem 1.625rem;
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item >.answer {
+    max-height: 0;
+    overflow: hidden;
+    border-top: 0.0625rem solid rgb(0,0,0);
+    font-size: 1.75rem;
+    /*padding: 1.125rem 1.625rem;*/
+    padding: 0 1.625rem;
+    transition-duration: 250ms;
+    transition-property: max-height, padding;
+    transition-timing-function: linear;
+
+}
+body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item > .checker:checked ~ .answer {
+    max-height: 50rem;
+    padding: 1.125rem 1.625rem;
+}
+body.unsigned > .box.faq > .wrapper > .register-form {
+    margin-top: 2rem;
+}
+body.unsigned > .box.footer {
+    color: rgb(152,152,152);
+}
+body.unsigned > .box.footer > .wrapper {
+    max-width: 55rem;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+body.unsigned > .box.footer > .wrapper > .sitemap {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 1fr;
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+    margin: 2rem 0;
+}
+body.unsigned > .box.footer > .wrapper > .sitemap > .item > .sitemap {
+    list-style-type: none;
+    margin-block: unset;
+    margin-inline: unset;
+    padding-inline: unset;
+}
+body.unsigned > .box.footer > .wrapper > .sitemap > .item > .sitemap > .item + .item {
+    margin-top: 0.75rem;
+}
+
+body.unsigned > .box.footer > .wrapper > .sitemap > .item > .sitemap > .item > .link {
+    color: inherit;
+    font-size: 0.9rem;
+    text-decoration: unset;
+}
+body.unsigned > .box.footer > .wrapper > .sitemap > .item > .sitemap > .item > .link:hover {
+    text-decoration: underline;
+}
+
+
+
+body.unsigned > .box.footer > .wrapper > .company {
+    font: inherit;
+    font-size: 0.85rem;
+    margin: unset;
+}
+
+
+/*반응형 페이지 부분..................*/
+@media screen and (max-width: 60rem){
+    /*@media screen and ( max-width: 60rem)*/
+    /* 60rem 보다 작아지는 경우 반응형 페이지로 바꾸어 보이게 하겠다는 말이다.*/
+    body.unsigned  .register-form >.title {
+        font-size: 2rem;
+        letter-spacing: unset;
+        /*글자 간의 간격을 조절한다*/
+        line-height: 110%;
+    /*    한줄 한줄 사이의 간격을 조절할 수 있다.*/
+    }
+    body.unsigned  .register-form > .subtitle {
+        font-size: 1.375rem;
+        /*글자 사이즈 조절 font-size:*/
+        text-align: center;
+    /*    글자 위치 조절 */
+    }
+    body.unsigned  .register-form > .ready {
+        font-size: 1.375rem;
+        text-align: center;
+    }
+    body.unsigned  .register-form > .input-container {
+        flex-direction: column;
+        /*flex의 사용 방향을 결정하는것*/
+        margin: unset;
+    }
+    body.unsigned  .register-form > .input-container > .input {
+        border-radius: 0.25rem;
+        /* 테두리 라운드 만들기 */
+        padding: 1.4rem 1rem 0.6rem 1rem;
+    }
+    body.unsigned  .register-form > .input-container > .placeholder {
+        top: 0.9rem;
+        left: 1rem;
+    }
+    body.unsigned  .register-form > .input-container > .input:not(:placeholder-shown) + .placeholder,
+    body.unsigned  .register-form > .input-container > .input:focus + .placeholder {
+        top: 0.4rem;
+        font-size: 0.8rem;
+    }
+    body.unsigned  .register-form > .input-container > .warning {
+       top: 3.5rem;
+    }
+    body.unsigned  .register-form > .input-container > .button {
+        top: 1.75rem;
+        align-self: center;
+        border-radius: 0.25rem;
+        font-size: 1.375rem;
+        padding: 0.5rem 1rem;
+        position: relative;
+    }
+    /**/
+    body.unsigned > .landing > .wrapper  > .header {
+        padding: 1.5rem 1.375rem;
+    }
+    body.unsigned > .landing > .wrapper  > .header > .button-container > .button {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+    body.unsigned > .landing > .wrapper  > .header > .button-container > .button + .button {
+        margin-left: 0.5rem;
+    }
+    /**/
+
+    body.unsigned > .landing > .wrapper  > .header > .logo {
+        height: 1.5rem;
+    }
+    body.unsigned > .box.banner > .wrapper {
+        flex-direction: column;
+    }
+    body.unsigned > .box.banner > .wrapper > .text-container {
+        max-width: unset;
+    }
+    body.unsigned > .box.banner > .wrapper > .text-container > .title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    body.unsigned > .box.banner > .wrapper > .text-container > .content {
+        font-size: 1.25rem;
+    }
+    body.unsigned > .box.banner > .wrapper > .image-container {
+        max-width: unset;
+    }
+    body.unsigned > .box.faq > .wrapper > .title {
+        font-size: 2.5rem;
+    }
+    body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item >.question {
+        font-size: 1.5rem;
+    }
+    body.unsigned > .box.faq > .wrapper > .faq-container > .faq-item > .answer {
+        font-size: 1.375rem;
+    }
+    body.unsigned > .box.faq > .wrapper > .register-form {
+        padding: unset;
+    }
+    body.unsigned > .footer {
+        padding: 2rem;
+    }
+    body.unsigned > .box.footer > .wrapper > .sitemap {
+        grid-gap: 2rem;
+        /*열과 행 사이의 간격을 조절할 수 있습니다.*/
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(2,1fr);
+    }
+    body.unsigned > .footer > .wrapper > .company {
+        white-space: break-spaces;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

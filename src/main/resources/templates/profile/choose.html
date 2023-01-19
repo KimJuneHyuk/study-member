@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>넷플릭스 즐겨보세용</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/shortcut-icon.png}">
+    <link rel="stylesheet" th:href="@{/profile/resources/stylesheets/choose.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+
+    <script defer th:src="@{/profile/resources/scripts/choose.js}"></script>
+    <script src="https://kit.fontawesome.com/f5742d24cb.js" crossorigin="anonymous"></script>
+</head>
+<body class="--theme-dark">
+<header class="header">
+    <img alt="Netflix" class="logo" th:src="@{/resources/images/logo.png}">
+</header>
+<div class="profile-dialog visible" id="profileDialog">
+    <h1 class="title">넷플릭스를 시청할 프로필을 선택하세요.</h1>
+    <div class="profile-container">
+        <a class="profile"
+           data-func="handleEditEachStart"
+           th:each="profile : ${profiles}"
+           th:href="@{/profile/choose (name=${profile.getName()})}"
+           th:data-name="${profile.getName()}"
+           th:data-kids="${profile.isKids()}"
+           th:data-profile-index="${profile.getProfileIndex()}">
+            <span class="image-container">
+                <span class="cover">
+                    <i class="icon fa-solid fa-pen"></i>
+                </span>
+                <img alt="" class="image"
+                     th:src="@{'/user/resources/images/profile' + ${profile.getProfileIndex()} + '.png'}">
+            </span>
+            <span class="name" th:text="${profile.getName()}"><!-- name --></span>
+        </a>
+        <a class="profile" href="#" id="profileAddAnchor">
+            <span class="letter-container">
+                <i class="letter fa-solid fa-circle-plus"></i>
+            </span>
+            <span class="name">프로필 추가</span>
+        </a>
+    </div>
+    <a class="manage" data-func="handleEditStart">프로필 관리</a>
+    <a class="edit-complete" data-func="handleEditComplete">완료</a>
+</div>
+<form class="profile-add-form" id="profileAddForm">
+    <h1 class="title">프로필 추가</h1>
+    <span class="message">넷플릭스를 시청할 다른 사용자를 등록하시려면 프로필을 추가하세요.</span>
+    <div class="value-container">
+        <img alt="" class="profile-image" th:src="@{/user/resources/images/profile12.png}">
+        <label class="input-container">
+            <span hidden>이름</span>
+            <input autofocus class="input" maxlength="10" name="name" placeholder="이름">
+        </label>
+        <label class="check-container">
+            <input class="check" name="isKids" type="checkbox">
+            <span class="checker-container">
+                <i class="checker fa-solid fa-check"></i>
+            </span>
+            <span class="message">어린이인가요?</span>
+        </label>
+        <span class="kid-message --theme-light">이 옵션을 선택하시면 이 프로필에 만 12세 이하 등급의 시리즈와 영화만 표시됩니다.</span>
+    </div>
+    <div class="button-container">
+        <input class="button next" type="submit" value="다음">
+        <input class="button cancel" name="cancel" type="button" value="취소">
+    </div>
+</form>
+
+<form class="profile-edit-form" id="profileEditForm">
+    <h1 class="title">프로필 변경</h1>
+    <input name="oldName" type="hidden">
+    <div class="value-container">
+        <img alt="" class="profile-image" th:src="@{/user/resources/images/profile12.png}">
+        <label class="input-container">
+            <span hidden>이름</span>
+            <input autofocus class="input" maxlength="10" name="name" placeholder="이름">
+        </label>
+        <label class="check-container">
+            <input class="check" name="isKids" type="checkbox">
+            <span class="checker-container">
+                <i class="checker fa-solid fa-check"></i>
+            </span>
+            <span class="message">어린이인가요?</span>
+        </label>
+        <span class="kid-message --theme-light">이 옵션을 선택하시면 이 프로필에 만 12세 이하 등급의 시리즈와 영화만 표시됩니다.</span>
+    </div>
+    <div class="profile-container">
+        <label class="radio-container" th:each="profileIndex : ${#numbers.sequence(1, 12)}">
+            <input name="profileIndex" type="radio" class="radio" th:value="${profileIndex}">
+            <img alt="" class="image" th:src="@{'/user/resources/images/profile' + ${profileIndex} + '.png'}">
+        </label>
+    </div>
+    <div class="button-container">
+        <input class="button next" type="submit" value="다음">
+        <input class="button cancel" name="cancel" type="button" value="취소" data-func="handleEditEachCancel">
+    </div>
+</form>
+</body>
+</html>

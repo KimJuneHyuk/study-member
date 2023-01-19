@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjh.studymember.mappers.IUserMapper">
+
+    <insert id="insertProfile"
+            parameterType="com.kjh.studymember.entities.member.ProfileEntity">
+        INSERT INTO `netflix_member`.`profiles` (`user_email`, `name`, `profile_index`, `kids_flag`, `created_at`,
+                                                 `last_access_at`)
+        values (#{userEmail}, #{name}, #{profileIndex}, #{isKids}, #{createdAt}, #{lastAccessAt})
+    </insert>
+
+    <insert id="insertUser"
+            parameterType="com.kjh.studymember.entities.member.UserEntity">
+        INSERT INTO `netflix_member`.`users` (`email`, `password`, `name`, `created_at`, `email_verified_flag`)
+        VALUES (#{email}, #{password}, #{name}, #{createdAt}, #{isEmailVerified})
+    </insert>
+
+    <insert id="insertEmailVerificationKey"
+            parameterType="com.kjh.studymember.entities.member.EmailVerificationKeyEntity">
+        INSERT INTO `netflix_member`.`email_verification_keys` (`user_email`, `key`, `created_at`, `expires_at`, `expired_flag`)
+        VALUES (#{userEmail}, #{key}, #{createdAt}, #{expiresAt}, #{isExpired})
+    </insert>
+
+    <update id="updateEmailVerificationKey"
+            parameterType="com.kjh.studymember.entities.member.EmailVerificationKeyEntity">
+        UPDATE `netflix_member`.`email_verification_keys`
+        SET `user_email`   = #{userEmail},
+            `created_at`   = #{createdAt},
+            `expires_at`   = #{expiresAt},
+            `expired_flag` = #{isExpired}
+        WHERE `key` = #{key}
+        LIMIT 1
+    </update>
+
+    <update id="updateUser"
+            parameterType="com.kjh.studymember.entities.member.UserEntity">
+        UPDATE `netflix_member`.`users`
+        SET `password`            = #{password},
+            `name`                = #{name},
+            `created_at`          = #{createdAt},
+            `email_verified_flag` = #{isEmailVerified}
+        WHERE `email` = #{email}
+        LIMIT 1
+    </update>
+
+
+
+    <select id="selectEmailVerificationKeyByKey"
+            resultType="com.kjh.studymember.entities.member.EmailVerificationKeyEntity">
+        SELECT `user_email`   AS `userEmail`,
+               `key`          AS `key`,
+               `created_at`   AS `createdAt`,
+               `expires_at`   AS `expiresAt`,
+               `expired_flag` AS `isExpired`
+        FROM `netflix_member`.`email_verification_keys`
+        WHERE `key` = #{key}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmail"
+            resultType="com.kjh.studymember.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `created_at`          AS `createdAt`,
+               `email_verified_flag` AS `isEmailVerified`
+        FROM `netflix_member`.`users`
+        WHERE BINARY `email` = #{email}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserByEmailAndPassword"
+            resultType="com.kjh.studymember.entities.member.UserEntity">
+        SELECT `email`               AS `email`,
+               `password`            AS `password`,
+               `name`                AS `name`,
+               `created_at`          AS `createdAt`,
+               `email_verified_flag` AS `isEmailVerified`
+        FROM `netflix_member`.`users`
+        WHERE BINARY `email` = #{email}
+          AND BINARY `password` = #{password}
+        LIMIT 1
+    </select>
+
+    <select id="selectUserCountByEmail"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `netflix_member`.`users`
+        WHERE BINARY `email` = #{email}
+    </select>
+</mapper>

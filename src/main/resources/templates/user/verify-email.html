@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Netflix</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/shortcut-icon.png}">
+    <script th:if="${result != null && result.equals(T(com.kjh.studymember.emums.CommonResult).FAILURE)}">
+        alert('해당 키가 존재하지 않거나 일시적인 오류로 인증을 완료하지 못하였습니다.\n\n 잠시 후 다시 시도하거나 해당 문제가 지속된다면 관리자....');
+        window.close();
+    </script>
+    <script th:if="${result != null && result.equals(T(com.kjh.studymember.emums.CommonResult).SUCCESS)}">
+        alert('이메일 인증 성공\n\n로그인 화면으로 이동하겠습니다.');
+        window.location.href='/user/login';
+    </script>
+    <script th:if="${result != null && result.equals(T(com.kjh.studymember.emums.member.user.VerifyEmailResult).FAILURE_EXPIRED)}">
+        alert('해당 인증이 만료 되었습니다.\n\n다시한번 확인해 주시기 바랍니다.');
+        window.close();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,325 @@
+@charset "UTF-8";
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden auto;
+    position: absolute;
+}
+
+body > .main {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem;
+}
+
+body > .main > .add-form {
+    max-width: 25rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+body > .main > .add-form > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
+body > .main > .add-form > .icon-container {
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    border: 0.125rem solid rgb(var(--theme-color-red));
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+}
+
+body > .main > .add-form > .icon-container > .icon {
+    color: rgb(var(--theme-color-red));
+    font-size: 1.425rem;
+}
+
+body > .main > .add-form > .title {
+    font-size: 1.625rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+body > .main > .add-form > .message {
+    line-height: 125%;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+body > .main > .add-form > .card-container {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+body > .main > .add-form > .card-container > .card {
+    color: rgb(75, 75, 75);
+    font-size: 1.75rem;
+}
+
+body > .main > .add-form > .card-container > .card + .card {
+    margin-left: 0.4rem;
+}
+
+body > .main > .add-form > .caption {
+    align-self: flex-start;
+    color: rgb(60, 60, 60);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+}
+
+/*     ==========================================        */
+body > .main > .add-form .common-button {
+    background-color: rgb(var(--theme-color-red));
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+body > .main > .add-form .input-wrapper {
+    align-items: center;
+    align-self: flex-start;
+    background-color: rgb(245, 245, 245);
+    border: 0.15rem solid rgb(215, 215, 215);
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 0.5rem 0.75rem;
+}
+
+body > .main > .add-form .input-wrapper:focus-within {
+    background-color: rgb(255, 255, 255);
+    border: 0.15rem solid rgb(133, 193, 233);
+}
+
+body > .main > .add-form .input-wrapper > .common-input {
+    width: 100%;
+    box-sizing: border-box;
+    color: rgb(150, 150, 150);
+    flex: 1;
+    font-size: 1.125rem;
+    letter-spacing: 0.25rem;
+    margin-left: 0.25rem;
+    text-align: center;
+}
+
+body > .main > .add-form .input-wrapper:focus-within > .common-input {
+    color: rgb(50, 50, 50);
+}
+
+body > .main > .add-form .input-wrapper > .common-text {
+    color: rgb(150, 150, 150);
+    flex: 0 0 1.25rem;
+    font-size: 1rem;
+    line-height: 100%;
+    pointer-events: none;
+    text-align: center;
+    user-select: none;
+}
+
+body > .main > .add-form > .card-number {
+    align-self: stretch;
+    overflow: visible;
+    position: relative;
+}
+
+body > .main > .add-form > .card-number > .card {
+    left: calc(100% + 0.875rem);
+    height: 1.5rem;
+    display: none;
+    position: absolute;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="amex"] ~ .card.amex {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="visa"] ~ .card.visa {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="master"] ~ .card.master {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="unionpay"] ~ .card.unionpay {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="dinersclub"] ~ .card.dinersclub {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="jcb"] ~ .card.jcb {
+    display: block;
+}
+
+body > .main > .add-form > .card-number > .card-number[data-card="bc"] ~ .card.bc {
+    display: block;
+}
+
+body > .main > .add-form > .exp,
+body > .main > .add-form > .cvc,
+body > .main > .add-form > .password,
+body > .main > .add-form > .name {
+    width: 7rem;
+}
+
+body > .main > .add-form > .birth {
+    width: 18rem;
+}
+
+body > .main > .add-form > .birth > .birth {
+    flex: 1;
+}
+
+body > .main > .add-form > .birth > .gender,
+body > .main > .add-form > .birth > .common-text {
+    flex: 0 0 1.25rem;
+    /*        그로우, 슈링크 , 베이시스 값  */
+}
+
+/*body > .main > .add-form > .password > .common-input {*/
+/*    letter-spacing: 1rem;*/
+/*    margin-left: 1rem;*/
+/*}*/
+
+/*body > .main > .add-form > .password > .common-text {*/
+/*    flex: 0.5;*/
+/*}*/
+
+body > .main > .add-form > .contact-wrapper,
+body > .main > .add-form > .contact-verification-wrapper,
+body > .main > .add-form > .address-postal-wrapper {
+    align-items: stretch;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .main > .add-form > .contact-verification-wrapper > .contact-verification {
+    width: 7rem;
+    margin-right: 0.5rem;
+}
+
+body > .main > .add-form > .contact-verification-wrapper > .common-button {
+    display: none;
+}
+
+body > .main > .add-form .common-button:hover {
+    background-color: rgb(var(--theme-color-red-hover));
+    transition-duration: 0.5s;
+}
+
+body > .main > .add-form .common-button:active {
+    filter: brightness(80%);
+    transition-duration: 0.3s
+}
+
+body > .main > .add-form > .contact-verification-wrapper > .common-button.visible {
+    display: block;
+}
+
+body > .main > .add-form > .contact-wrapper > .contact-telecom {
+    width: 7rem;
+    box-sizing: border-box;
+    margin-right: 0.5rem;
+}
+
+body > .main > .add-form > .contact-wrapper > .contact {
+    flex: 1;
+}
+
+body > .main > .add-form > .address-postal-wrapper > .address-postal {
+    width: 7rem;
+    margin-right: 0.5rem;
+}
+
+body > .main > .add-form > .address-primary,
+body > .main > .add-form > .address-secondary {
+    align-self: stretch;
+}
+
+body > .main > .add-form > .address-primary > .address-primary,
+body > .main > .add-form > .address-secondary > .address-secondary {
+    letter-spacing: unset;
+    text-align: left;
+}
+
+body > .address-search-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 80%);
+    display: none;
+    position: fixed;
+    z-index: 8;
+}
+
+body > .address-search-container > .dialog {
+    top: 50%;
+    left: 50%;
+    border-radius: 0.5rem;
+    max-width: calc(100% - 2rem);
+    max-height: calc(100% - 2rem);
+    background-color: rgb(255, 255, 255);
+    overflow: auto;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+body.searching {
+    overflow: hidden;
+}
+
+body.searching > .address-search-container {
+    display: block;
+}
+
+body > .main > .add-form > .submit-button {
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

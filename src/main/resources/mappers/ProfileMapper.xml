@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjh.studymember.mappers.IProfileMapper">
+
+
+    <insert id="insertProfile"
+            parameterType="com.kjh.studymember.entities.member.ProfileEntity">
+        INSERT INTO `netflix_member`.`profiles` (`user_email`, `name`, `profile_index`, `kids_flag`, `created_at`,
+                                                 `last_access_at`)
+        values (#{userEmail}, #{name}, #{profileIndex}, #{isKids}, #{createdAt}, #{lastAccessAt})
+    </insert>
+
+    <select id="selectProfilesByEmail"
+            resultType="com.kjh.studymember.entities.member.ProfileEntity">
+        SELECT `user_email`     AS `userEmail`,
+               `name`           AS `name`,
+               `profile_index`  AS `profileIndex`,
+               `kids_flag`      AS `isKids`,
+               `created_at`     AS `createdAt`,
+               `last_access_at` AS `lastAccessAt`
+        FROM `netflix_member`.`profiles`
+        WHERE `user_email` = #{email}
+        ORDER BY `user_email`, `name`
+    </select>
+
+    <select id="selectProfileCountByEmailAndName"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `netflix_member`.`profiles`
+        WHERE BINARY `user_email` = #{email}
+          AND BINARY `name` = #{name}
+    </select>
+
+    <update id="updateProfileByEmailAndName">
+        UPDATE `netflix_member`.`profiles`
+        SET `name`          = #{newProfile.name},
+            `profile_index` = #{newProfile.profileIndex},
+            `kids_flag`     = #{newProfile.isKids}
+        WHERE `user_email` = #{oldEmail}
+          AND `name` = #{oldName}
+        LIMIT 1
+    </update>
+</mapper>

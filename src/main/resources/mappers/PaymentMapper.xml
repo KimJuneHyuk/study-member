@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjh.studymember.mappers.IPaymentMapper">
+
+    <insert id="insertPayment"
+            useGeneratedKeys="true"
+            keyColumn="index"
+            keyProperty="index"
+            parameterType="com.kjh.studymember.entities.member.PaymentEntity">
+        INSERT INTO `netflix_member`.`payments` (`user_email`, `name`, `contact_telecom`, `contact_first`,
+                                                 `contact_second`, `contact_third`, `birth`, `gender`,
+                                                 `address_postal`, `address_primary`, `address_secondary`,
+                                                 `card_number_first`, `card_number_second`, `card_number_third`,
+                                                 `card_number_fourth`, `card_number_exp_m`, `card_number_exp_y`,
+                                                 `card_number_cvc`, `created_at`, `default_flag`)
+        values ( #{userEmail}, #{name}, #{contactTelecom}, #{contactFirst}, #{contactSecond}, #{contactThird}, #{birth}
+               , #{gender}, #{addressPostal}
+               , #{addressPrimary}, #{addressSecondary}, #{cardNumberFirst}, #{cardNumberSecond}, #{cardNumberThird}
+               , #{cardNumberFourth}, #{cardNumberExpM}, #{cardNumberExpY}, #{cardNumberCvc}, #{createdAt}
+               , #{isDefault})
+    </insert>
+
+    <insert id="insertPaymentContactVerificationCode"
+            parameterType="com.kjh.studymember.entities.member.PaymentContactVerificationCodeEntity">
+        INSERT INTO `netflix_member`.`payment_contact_verification_codes`(`contact_first`, `contact_second`,
+                                                                          `contact_third`, `code`, `salt`, `created_at`,
+                                                                          `expires_at`, `expired_flag`)
+        VALUES (#{contactFirst}, #{contactSecond}, #{contactThird}, #{code}, #{salt}, #{createdAt}, #{expiresAt},
+                #{isExpired})
+    </insert>
+
+    <select id="selectPaymentContactVerificationCode"
+            parameterType="com.kjh.studymember.entities.member.PaymentContactVerificationCodeEntity"
+            resultType="com.kjh.studymember.entities.member.PaymentContactVerificationCodeEntity">
+        SELECT `contact_first`  AS `contactFirst`,
+               `contact_second` AS `contactSecond`,
+               `contact_third`  AS `contactThird`,
+               `code`           AS `code`,
+               `salt`           AS `salt`,
+               `created_at`     AS `createdAt`,
+               `expires_at`     AS `expiresAt`,
+               `expired_flag`   AS `isExpired`
+        FROM `netflix_member`.`payment_contact_verification_codes`
+        WHERE `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
+          AND `salt` = #{salt}
+          AND `code` = #{code}
+        LIMIT 1
+    </select>
+
+    <select id="selectPaymentsByEmail"
+            resultType="com.kjh.studymember.entities.member.PaymentEntity">
+        SELECT `index`              AS `index`,
+               `user_email`         AS `userEmail`,
+               `name`               AS `name`,
+               `contact_telecom`    AS `contactTelecom`,
+               `contact_first`      AS `contactFirst`,
+               `contact_second`     AS `contactSecond`,
+               `contact_third`      AS `contactThird`,
+               `birth`              AS `birth`,
+               `gender`             AS `gender`,
+               `address_postal`     AS `addressPostal`,
+               `address_primary`    AS `addressPrimay`,
+               `address_secondary`  AS `addressSecondary`,
+               `card_number_first`  AS `cardNumberFirst`,
+               `card_number_second` AS `cardNumberSecond`,
+               `card_number_third`  AS `cardNumberThird`,
+               `card_number_fourth` AS `cardNumberFourth`,
+               `card_number_exp_m`  AS `cardNumberExpM`,
+               `card_number_exp_y`  AS `cardNumberExpY`,
+               `card_number_cvc`    AS `cardNumberCvc`,
+               `created_at`         AS `createdAt`,
+               `default_flag`       AS `isDefault`
+        FROM `netflix_member`.`payments`
+        WHERE `user_email` = #{email}
+        ORDER BY `index`
+    </select>
+
+    <select id="selectTelecoms"
+            resultType="com.kjh.studymember.entities.member.TelecomEntity">
+        SELECT `value` AS `value`,
+               `text`  AS `text`
+        FROM `netflix_member`.`telecoms`
+        ORDER BY `value`
+    </select>
+
+    <update id="updatePaymentContactVerificationCode"
+            parameterType="com.kjh.studymember.entities.member.PaymentContactVerificationCodeEntity">
+        UPDATE `netflix_member`.`payment_contact_verification_codes`
+        SET `created_at`   = #{createdAt},
+            `expires_at`   = #{expiresAt},
+            `expired_flag` = #{isExpired}
+        WHERE `contact_first` = #{contactFirst}
+          AND `contact_second` = #{contactSecond}
+          AND `contact_third` = #{contactThird}
+          AND `salt` = #{salt}
+          AND `code` = #{code}
+        LIMIT 1
+    </update>
+
+
+</mapper>

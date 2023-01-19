@@ -1,0 +1,13 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<header class="_global-header" th:fragment="header"
+th:with="user = ${#session.getAttribute('user')}">
+    <a th:href="@{/}" class="logo-container">
+        <img class="logo" th:src="@{/resources/images/logo.png}" alt="logo">
+    </a>
+
+    <div class="stretch"></div>
+
+    <a class="user-link" th:href="@{/user/login}" th:if="${session.user == null}">로그인</a>
+    <a class="user-link" th:href="@{/user/logout}" th:if="${session.user != null}">로그아웃</a>
+</header>
+</html>

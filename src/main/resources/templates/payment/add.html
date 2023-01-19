@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>결제정보창</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/shortcut-icon.png}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+    <link rel="stylesheet" th:href="@{/payment/resources/stylesheets/add.css}">
+    <script defer th:src="@{/payment/resources/scripts/add.js}"></script>
+    <script async src="https://kit.fontawesome.com/f5742d24cb.js" crossorigin="anonymous"></script>
+<!--    주소 찾기 api-->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+<!-- fragments html을 사용하기로 한다. -->
+<th:block th:replace="~{/fragments/global-header :: header}"></th:block>
+<div class="address-search-container" id="addressSearchContainer" data-func="closeAddressSearch">
+    <div class="dialog">
+
+    </div>
+</div>
+
+<main class="main">
+    <form class="add-form" id="add-form" method="post">
+        <div class="icon-container">
+            <i class="icon fa-regular fa-credit-card"></i>
+        </div>
+        <h1 class="title">결제 정보 등록</h1>
+        <spam class="message">한 한도 놓치지 마세요. 예비 결제 수단은 기본 결제 수단으로 처리할 수 없을 때만 사용합니다.</spam>
+        <div class="card-container">
+            <i class="card fa-brands fa-cc-visa" title="비자카드"></i>
+            <i class="card fa-brands fa-cc-stripe"></i>
+            <i class="card fa-brands fa-cc-paypal"></i>
+            <i class="card fa-brands fa-cc-jcb"></i>
+            <i class="card fa-brands fa-cc-discover"></i>
+            <i class="card fa-brands fa-cc-apple-pay"></i>
+            <i class="card fa-brands fa-cc-amex"></i>
+            <i class="card fa-brands fa-cc-amazon-pay"></i>
+            <i class="card fa-brands fa-cc-diners-club"></i>
+        </div>
+
+        <span class="caption">카드 번호</span>
+        <label class="card-number input-wrapper">
+            <input type="text" name="cardNumberFirst" data-format="number" class="common-input card-number" maxlength="4" data-cycle>
+            <span class="common-text">-</span>
+            <input type="text" name="cardNumberSecond" data-format="number" class="common-input card-number" maxlength="4" data-cycle>
+            <span class="common-text">-</span>
+            <input type="text" name="cardNumberThird" data-format="number" class="common-input card-number" maxlength="4" data-cycle>
+            <span class="common-text">-</span>
+<!--            마지막 카드번호 4자 password 처리.-->
+            <input type="password" name="cardNumberFourth" data-format="number" class="common-input card-number" maxlength="4" data-cycle>
+
+
+            <img class="card amex" alt="아멕스" th:src="@{/resources/images/card.amex.png}" data-card="amex">
+            <img class="card visa" alt="VISA" th:src="@{/resources/images/card.visa.png}" data-card="visa">
+            <img class="card master" alt="마스터" th:src="@{/resources/images/card.master.png}" data-card="master">
+            <img class="card unionpay" alt="은련" th:src="@{/resources/images/card.unionpay.png}" data-card="unionpay">
+            <img class="card dinersclub" alt="다이너스 클럽" th:src="@{/resources/images/card.dinersclub.png}"  data-card="dinersclub">
+            <img class="card jcb" alt="JCB" th:src="@{/resources/images/card.jcb.png}" data-card="jcb">
+            <img class="card bc" alt="BC" th:src="@{/resources/images/card.bc.png}" data-card="bc">
+        </label>
+
+        <span class="caption">유효 기간</span>
+        <label class="exp input-wrapper">
+            <input type="text" name="cardNumberExpM"  placeholder="MM" class="common-input exp" maxlength="2" data-format="number" data-cycle>
+            <span class="common-text">/</span>
+            <input type="text" name="cardNumberExpY"  placeholder="YY" class="common-input exp" maxlength="2" data-format="number" data-cycle>
+        </label>
+
+        <span class="caption">CVC</span>
+        <label class="cvc input-wrapper">
+            <input type="text" name="cardNumberCvc"  placeholder="CVC" class="common-input cvc" maxlength="4" data-format="number" data-cycle>
+        </label>
+
+        <span class="caption">비밀번호 앞 두 자리</span>
+        <label class="password input-wrapper">
+            <input type="password" name="password" class="common-input password" maxlength="2" data-format="number" data-cycle>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+        </label>
+
+        <span class="caption">결제자 이름</span>
+        <label class="name input-wrapper">
+            <input type="text" name="name"  placeholder="이름" class="common-input name" maxlength="5" data-cycle>
+        </label>
+
+        <span class="caption">결제자 생년월일 및 성별</span>
+        <label class="birth input-wrapper">
+            <input type="text" name="birthDp" class="common-input birth" maxlength="6" data-format="number" data-cycle>
+            <input type="hidden" name="birth">
+            <span class="common-text">-</span>
+            <input type="text" name="gender" class="common-input gender" maxlength="1" data-format="number" data-cycle>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+            <span class="common-text">●</span>
+        </label>
+
+        <span class="caption">결제자 연락처</span>
+        <div class="contact-wrapper">
+            <label class="input-wrapper contact-telecom" >
+                <select class="common-input contact-telecom" name="contactTelecom">
+                    <option value="-1" disabled hidden selected>통신사</option>
+                    <option th:each="telecom : ${telecoms}"
+                            th:value="${telecom.getValue()}"
+                            th:text="${telecom.getText()}"></option>
+                </select>
+            </label>
+            <label class="input-wrapper contact">
+                <input   class="common-input contact-first" name="contactFirst" type="text" maxlength="3" data-cycle data-format="number">
+                <span class="common-text">-</span>
+                <input   class="common-input contact-second" name="contactSecond" type="text" maxlength="4" data-cycle data-format="number">
+                <span class="common-text">-</span>
+                <input   class="common-input contact-third" name="contactThird" type="text" maxlength="4" data-cycle data-format="number">
+            </label>
+        </div>
+
+        <div class="contact-verification-wrapper">
+            <label class="input-wrapper contact-verification">
+                <input type="text" class="common-input contact-verification" disabled maxlength="6" name="contactVerificationCode" data-cycle data-format="number">
+<!--                인증 번호 : 6자리 input : contactVerificationCode -->
+            </label>
+
+            <input type="hidden" name="contactVerificationSalt">
+<!--            salt -->
+            <input type="button" class="common-button contact-verification-send visible" name="contact-verification-send" value="인증번호 전송"data-func="sendContactVerificationCode">
+<!--            전송 버튼 : sendContactVerificationCode -->
+            <input type="button" class="common-button contact-verification-check" name="contact-verification-check" value="인증번호 확인" data-func="checkContactVerificationCode">
+<!--            인증 번호 확인 버튼 : contact-verification-check-->
+        </div>
+
+        <span class="caption">청구지 주소</span>
+        <div class="address-postal-wrapper">
+            <label class="input-wrapper address-postal">
+                <input type="text" class="common-input address-postal" maxlength="5" name="addressPostal" readonly data-cycle data-format="number">
+            </label>
+            <input type="button" class="common-button address-postal" value="주소 찾기" data-func="openAddressSearch">
+        </div>
+        <label class="input-wrapper address-primary">
+            <input type="text" class="common-input address-primary" maxlength="100" name="addressPrimary" readonly data-cycle>
+        </label>
+        <label class="input-wrapper address-secondary">
+            <input type="text" class="common-input address-secondary" maxlength="100" name="addressSecondary" data-cycle>
+        </label>
+        <input type="submit" class="common-button submit-button" value="결제 정보 등록">
+        <input type="hidden" name="code">
+        <input type="hidden" name="salt">
+    </form>
+</main>
+
+<!-- fragments html 의 global-footer 을 사용하겠다. -->
+<th:block th:replace="~{/fragments/global-footer :: footer}"></th:block>
+</body>
+</html>

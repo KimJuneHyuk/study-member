@@ -1,0 +1,551 @@
+@charset "UTF-8";
+
+body {
+    min-height: 100%;
+    min-width: 100%;
+    background-color: rgb(20, 20, 20) !important;
+    margin: 0;
+    position: absolute;
+}
+
+body > .header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    background: rgb(20, 20, 20);
+    background: linear-gradient(0deg, rgba(20, 20, 20, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 1.75rem 2.25rem;
+    position: fixed;
+    z-index: 1;
+}
+
+body > .header > .logo {
+    height: 1.5rem;
+}
+
+body > .profile-dialog {
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(105%) translate(-50%, -50%);
+    transform-origin: center center;
+    transition-duration: 500ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+}
+
+body > .profile-dialog.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(100%) translate(-50%, -50%);
+}
+
+body > .profile-dialog > .title {
+    font-size: min(3.5rem, 4.5vw);
+    margin: 0 1rem 3rem 1rem;
+    white-space: nowrap;
+}
+
+body > .profile-dialog > .profile-container {
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, auto);
+}
+
+body > .profile-dialog > .profile-container > .profile {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+:root {
+    --profile-size: min(max(6.5rem, 13vw), 10rem);
+}
+body > .profile-dialog > .profile-container > .profile > .image-container > .cover {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    display: none;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+}
+body > .profile-dialog.edit-mode > .profile-container > .profile > .image-container > .cover {
+    display: block;
+}
+body > .profile-dialog > .profile-container > .profile > .image-container > .cover > .icon {
+    color: rgb(255,255,255);
+    font-size: 2.25rem;
+}
+body > .profile-dialog > .profile-container > .profile > .image-container {
+    position: relative;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+body > .profile-dialog > .profile-container > .profile > .image-container > .image {
+    width: var(--profile-size);
+    border: 0.2rem solid transparent;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+body > .profile-dialog.edit-mode > .profile-container > .profile > .image-container > .image {
+    filter: brightness(60%);
+}
+
+body > .profile-dialog > .profile-container > .profile:hover > .image-container > .image {
+    border: 0.2rem solid rgb(255, 255, 255);
+}
+
+body > .profile-dialog > .profile-container > .profile > .name {
+    color: rgb(160, 160, 160);
+    font-size: min(max(1.75vw, 1rem), 1.5rem);
+}
+
+body > .profile-dialog > .profile-container > .profile:hover > .name {
+    color: rgb(255, 255, 255);
+}
+
+body > .profile-dialog > .profile-container > .profile > .letter-container {
+    width: var(--profile-size);
+    height: var(--profile-size);
+    align-items: center;
+    border: 0.2rem solid transparent;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+body > .profile-dialog > .profile-container > .profile:hover > .letter-container {
+    background-color: rgb(255, 255, 255);
+}
+
+body > .profile-dialog > .profile-container > .profile > .letter-container > .letter {
+    color: rgb(160, 160, 160);
+    font-size: max(min(6vw, 6rem), 3rem);
+}
+
+body > .profile-dialog > .manage {
+    border: 0.0625rem solid rgb(160, 160, 160);
+    color: rgb(160, 160, 160);
+    cursor: pointer;
+    font-size: min(max(1.75vw, 1rem), 1.5rem);
+    margin-top: 3rem;
+    padding: 0.625rem 1.5rem;
+    text-decoration: none;
+    user-select: none;
+}
+body > .profile-dialog.edit-mode > .manage {
+    display: none;
+}
+
+body > .profile-dialog > .manage:hover {
+    border: 0.0625rem solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+body > .profile-dialog > .edit-complete {
+    color: rgb(0, 0, 0);
+    border: 0.0625rem solid rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
+    cursor: pointer;
+    display: none;
+    font-size: min(max(1.75vw, 1rem), 1.5rem);
+    margin-top: 3rem;
+    padding: 0.625rem 1.5rem;
+    text-decoration: none;
+    user-select: none;
+}
+body > .profile-dialog > .edit-complete:hover {
+    color: rgb(255,255,255);
+    background-color: rgb(var(--theme-color-red));
+    border: 0.0625rem solid rgb(var(--theme-color-red));
+}
+body > .profile-dialog.edit-mode > .edit-complete {
+    display: block;
+}
+
+body > .profile-add-form {
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 2rem);
+    max-width: 40rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(105%) translate(-50%, -50%);
+    transform-origin: center;
+    transition-duration: 500ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+}
+
+body > .profile-add-form.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(100%) translate(-50%, -50%);
+}
+
+body > .profile-add-form > .title {
+    font-size: min(3.5rem, 4.5vw);
+    margin-bottom: 1.75rem;
+}
+
+body > .profile-add-form > .message {
+    color: rgb(160, 160, 160);
+    font-size: 1.125rem;
+}
+
+body > .profile-add-form > .value-container {
+    border-top: 0.0625rem solid rgb(60, 60, 60);
+    border-bottom: 0.0625rem solid rgb(60, 60, 60);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    position: relative;
+}
+
+body > .profile-add-form > .value-container > .profile-image {
+    width: 7.5rem;
+    border-radius: 0.5rem;
+}
+
+body > .profile-add-form > .value-container > .input-container {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 1.25rem;
+}
+
+body > .profile-add-form > .value-container > .input-container > .input {
+    background-color: rgb(100, 100, 100);
+    padding: 0.5rem 1rem;
+}
+
+body > .profile-add-form > .value-container > .check-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    user-select: none;
+}
+
+body > .profile-add-form > .value-container > .check-container > .check {
+    display: none;
+}
+
+body > .profile-add-form > .value-container > .check-container > .checker-container {
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    border: 0.0625rem solid rgb(60, 60, 60);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+body > .profile-add-form > .value-container > .check-container > .checker-container > .checker {
+    display: none;
+    font-size: 1.25rem;
+}
+
+body > .profile-add-form > .value-container > .check-container > .check:checked ~ .checker-container > .checker {
+    display: block;
+}
+
+body > .profile-add-form > .value-container > .check-container > .message {
+    font-size: 1.125rem;
+}
+
+body > .profile-add-form > .value-container > .kid-message {
+    right: 0;
+    bottom: calc(50% - 2rem);
+    max-width: 15rem;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1.125rem;
+    opacity: 0;
+    padding: 1rem;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-50%);
+    transition-duration: 250ms;
+    transition-property: opacity, bottom;
+    transition-timing-function: ease;
+}
+
+body > .profile-add-form > .value-container > .check-container:hover ~ .kid-message {
+    bottom: calc(50% - 1.5rem);
+    opacity: 1;
+}
+
+body > .profile-add-form > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .profile-add-form > .button-container > .button {
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.5rem 1.75rem;
+}
+
+body > .profile-add-form > .button-container > .button + .button {
+    margin-left: 1rem;
+}
+
+body > .profile-add-form > .button-container > .button.next {
+    background-color: rgb(var(--theme-color-red));
+}
+
+body > .profile-add-form > .button-container > .button.next:hover {
+    background-color: rgb(var(--theme-color-red-hover));
+}
+
+body > .profile-add-form > .button-container > .button.cancel {
+    border: 0.0625rem solid rgb(60, 60, 60);
+    color: rgb(160, 160, 160);
+}
+
+body > .profile-add-form > .button-container > .button.cancel:hover {
+    border: 0.0625rem solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+body > .profile-edit-form {
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 2rem);
+    max-width: 40rem;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(105%) translate(-50%, -50%);
+    transform-origin: center;
+    transition-duration: 500ms;
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+}
+
+body > .profile-edit-form.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(100%) translate(-50%, -50%);
+}
+
+body > .profile-edit-form > .title {
+    font-size: min(3.5rem, 4.5vw);
+    margin-bottom: 1.75rem;
+}
+
+body > .profile-edit-form > .message {
+    color: rgb(160, 160, 160);
+    font-size: 1.125rem;
+}
+
+body > .profile-edit-form > .value-container {
+    border-top: 0.0625rem solid rgb(60, 60, 60);
+    border-bottom: 0.0625rem solid rgb(60, 60, 60);
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    position: relative;
+}
+
+body > .profile-edit-form > .value-container > .profile-image {
+    width: 7.5rem;
+    border-radius: 0.5rem;
+}
+
+body > .profile-edit-form > .value-container > .input-container {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 1.25rem;
+}
+
+body > .profile-edit-form > .value-container > .input-container > .input {
+    background-color: rgb(100, 100, 100);
+    padding: 0.5rem 1rem;
+}
+
+body > .profile-edit-form > .value-container > .check-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    user-select: none;
+}
+
+body > .profile-edit-form > .value-container > .check-container > .check {
+    display: none;
+}
+
+body > .profile-edit-form > .value-container > .check-container > .checker-container {
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    border: 0.0625rem solid rgb(60, 60, 60);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+body > .profile-edit-form > .value-container > .check-container > .checker-container > .checker {
+    display: none;
+    font-size: 1.25rem;
+}
+
+body > .profile-edit-form > .value-container > .check-container > .check:checked ~ .checker-container > .checker {
+    display: block;
+}
+
+body > .profile-edit-form > .value-container > .check-container > .message {
+    font-size: 1.125rem;
+}
+
+body > .profile-edit-form > .value-container > .kid-message {
+    right: 0;
+    bottom: calc(50% - 2rem);
+    max-width: 15rem;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1.125rem;
+    opacity: 0;
+    padding: 1rem;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-50%);
+    transition-duration: 250ms;
+    transition-property: opacity, bottom;
+    transition-timing-function: ease;
+}
+
+body > .profile-edit-form > .value-container > .check-container:hover ~ .kid-message {
+    bottom: calc(50% - 1.5rem);
+    opacity: 1;
+}
+
+body > .profile-edit-form > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+body > .profile-edit-form > .button-container > .button {
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0.5rem 1.75rem;
+}
+
+body > .profile-edit-form > .button-container > .button + .button {
+    margin-left: 1rem;
+}
+
+body > .profile-edit-form > .button-container > .button.next {
+    background-color: rgb(var(--theme-color-red));
+}
+
+body > .profile-edit-form > .button-container > .button.next:hover {
+    background-color: rgb(var(--theme-color-red-hover));
+}
+
+body > .profile-edit-form > .button-container > .button.cancel {
+    border: 0.0625rem solid rgb(60, 60, 60);
+    color: rgb(160, 160, 160);
+}
+
+body > .profile-edit-form > .button-container > .button.cancel:hover {
+    border: 0.0625rem solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+body > .profile-edit-form > .profile-container {
+    border-bottom: 0.0625rem ;
+    grid-gap: 0.75rem;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(6,1fr);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+body > .profile-edit-form > .profile-container > .radio-container {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+body > .profile-edit-form > .profile-container > .radio-container > .radio {
+    display: none;
+}
+body > .profile-edit-form > .profile-container > .radio-container > .image {
+    width: 100%;
+    border: 0.2rem solid transparent;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+body > .profile-edit-form > .profile-container > .radio-container > .radio:checked ~ .image {
+    border: 0.2rem solid rgb(255,255,255);
+}
+body > .profile-edit-form > .profile-container > .radio-container > .image.current {
+    border: 0.2rem solid rgb(var(--theme-color-red));
+}
+body > .profile-edit-form > .profile-container > .radio-container:hover > .image {
+    border: 0.2rem solid rgb(255,255,255);
+}
+
+
+

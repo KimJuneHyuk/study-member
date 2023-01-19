@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>넷플릭스 즐겨보세용</title>
+    <link rel="shortcut icon" th:href="@{/resources/images/shortcut-icon.png}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/index.css}">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+
+    <script src="https://kit.fontawesome.com/f5742d24cb.js" crossorigin="anonymous"></script>
+    <script defer th:src="@{/resources/scripts/index.js}"></script>
+</head>
+<body>
+<header class="header">
+    <img alt="Netflix" class="logo" th:src="@{/resources/images/logo.png}">
+    <ul class="menu-container main">
+        <li class="menu">
+            <a class="link" th:href="@{/}">홈</a>
+        </li>
+        <li class="menu">
+            <a class="link" th:href="@{/series}">시리즈</a>
+        </li>
+        <li class="menu">
+            <a class="link" th:href="@{/movie}">영화</a>
+        </li>
+        <li class="menu">
+            <a class="link" th:href="@{/favorite}">내가 찜한 컨텐츠</a>
+        </li>
+    </ul>
+    <ul class="menu-container right">
+        <li class="menu search">
+            <i class="icon fa-solid fa-magnifying-glass"></i>
+        </li>
+        <li class="menu user">
+            <div class="profile-container">
+                <img alt="" class="image" th:src="@{'/user/resources/images/profile' + ${session.profile.getProfileIndex()} + '.png'}">
+                <i class="icon fa-solid fa-sort-down"></i>
+            </div>
+            <ul class="menu-container">
+                <!--/*@thymesVar id="profiles" type="com.yhp.studymember.entities.member.ProfileEntity[]"*/-->
+                <li class="menu profile-container"
+                    th:each="profile : ${profiles}"
+                    th:if="${!profile.getName().equals(session.profile.getName())}">
+                    <a class="link" th:href="@{/profile/choose (name=${profile.getName()})}">
+                        <img alt="" class="image" th:src="@{'/user/resources/images/profile' + ${profile.getProfileIndex()} + '.png'}">
+                        <span class="name" th:text="${profile.getName()}"><!-- profile name --></span>
+                    </a>
+                </li>
+                <li class="menu general">
+                    <a class="link" th:href="@{/user/account}">
+                        <span class="icon-container">
+                            <i class="icon fa-solid fa-user"></i>
+                        </span>
+                        <span class="text">계정</span>
+                    </a>
+                </li>
+                <li class="menu general">
+                    <a class="link" th:href="@{/help/}">
+                        <span class="icon-container">
+                            <i class="icon fa-solid fa-question"></i>
+                        </span>
+                        <span class="text">고객 센터</span>
+                    </a>
+                </li>
+                <li class="menu logout">
+                    <a class="link" th:href="@{/user/logout}">넷플릭스에서 로그아웃</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<div class="media-container" id="media-container">
+    <div class="cover" data-func="Media.hideDetail"></div>
+    <div class="dialog">
+        <div class="loading">
+            <img th:src="@{/resources/images/loading-progress-image.png}" alt="" class="image">
+        </div>
+        <div class="video-container">
+            <video autoplay class="video" loop muted rel="teaserVideo"></video>
+            <div class="spec-container">
+                <img alt="" class="image" rel="logoImage">
+                <div class="button-container">
+                    <a class="button play">
+                        <i class="icon fa-solid fa-play"></i>
+                        <span class="text">재생</span>
+                    </a>
+                    <label class="button favorite">
+                        <input class="check" type="checkbox">
+                        <i class="icon add fa-solid fa-plus"></i>
+                        <i class="icon remove fa-solid fa-check"></i>
+                        <span class="hint add">내가 찜한 콘텐츠에 추가</span>
+                        <span class="hint remove">내가 찜한 콘텐츠에서 삭제</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="info-container">
+            <div class="left">
+                <div class="top">
+                    <span class="year" rel="publishedYear"></span>
+                    <span class="rating">
+
+                     </span>
+                    <span class="box fhd" rel="fhd">FHD</span>
+                    <span class="box uhd" rel="uhd">UHD</span>
+                    <span class="box commentary" rel="commentary">AD</span>
+                </div>
+                <div class="desc" rel="description"></div>
+            </div>
+            <ul class="right">
+                <li class="item">
+                    <span class="title">출연:</span>
+                    <span class="value" rel="actors"></span>
+                </li>
+                <li class="item">
+                    <span class="title">장르:</span>
+                    <span class="value" rel="genres"></span>
+                </li>
+                <li class="item">
+                    <span class="title">시리즈 특징:</span>
+                    <span class="value" rel="features"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="today-container">
+    <video autoplay class="video" loop muted th:src="@{/resources/videos/woo.webm}"></video>
+    <div class="dimmer"></div>
+    <div class="spec-container">
+        <img alt="" class="image" th:src="@{/resources/images/woo.webp}">
+        <span class="desc">천재적인 두뇌의 소유자 우영우. 대형 로펌의 신입 변호사이자 자폐 스펙트럼 장애를 가진 여성으로서 법정 안팎에서 다양한 난관을 헤쳐간다.</span>
+        <div class="button-container">
+            <a class="button play">
+                <i class="icon fa-solid fa-play"></i>
+                <span class="text">재생</span>
+            </a>
+            <a class="button spec" data-func="route" data-route="media" data-args="{&quot;mid&quot;:1}">
+                <i class="icon fa-solid fa-circle-info"></i>
+                <span class="text">상세 정보</span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
